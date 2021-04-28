@@ -1,5 +1,6 @@
 package uk.tw.energy.service;
 
+import java.math.BigDecimal;
 import org.springframework.stereotype.Service;
 import uk.tw.energy.domain.ElectricityReading;
 
@@ -26,5 +27,9 @@ public class MeterReadingService {
             meterAssociatedReadings.put(smartMeterId, new ArrayList<>());
         }
         meterAssociatedReadings.get(smartMeterId).addAll(electricityReadings);
+    }
+
+    public BigDecimal getLastWeekReading(String smartMeterId) {
+        return  new BigDecimal(0);
     }
 }

@@ -1,5 +1,7 @@
 package uk.tw.energy.controller;
 
+import java.math.BigDecimal;
+import java.util.ResourceBundle;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,14 +40,14 @@ public class MeterReadingController {
         String smartMeterId = meterReadings.getSmartMeterId();
         List<ElectricityReading> electricityReadings = meterReadings.getElectricityReadings();
         return smartMeterId != null && !smartMeterId.isEmpty()
-                && electricityReadings != null && !electricityReadings.isEmpty();
+            && electricityReadings != null && !electricityReadings.isEmpty();
     }
 
     @GetMapping("/read/{smartMeterId}")
     public ResponseEntity readReadings(@PathVariable String smartMeterId) {
         Optional<List<ElectricityReading>> readings = meterReadingService.getReadings(smartMeterId);
         return readings.isPresent()
-                ? ResponseEntity.ok(readings.get())
-                : ResponseEntity.notFound().build();
+            ? ResponseEntity.ok(readings.get())
+            : ResponseEntity.notFound().build();
     }
 }

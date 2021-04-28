@@ -35,7 +35,11 @@ public class PricePlanService {
                 Collectors.toMap(PricePlan::getPlanName, t -> calculateCost(electricityReadings.get(), t))));
     }
 
-    private BigDecimal calculateCost(List<ElectricityReading> electricityReadings, PricePlan pricePlan) {
+    public PricePlan getPricePlanById(String planId){
+        return  pricePlans.stream().filter(plan -> plan.getPlanName() == planId).findFirst().get();
+    }
+
+    public BigDecimal calculateCost(List<ElectricityReading> electricityReadings, PricePlan pricePlan) {
         BigDecimal average = calculateAverageReading(electricityReadings);
         BigDecimal timeElapsed = calculateTimeElapsed(electricityReadings);
 

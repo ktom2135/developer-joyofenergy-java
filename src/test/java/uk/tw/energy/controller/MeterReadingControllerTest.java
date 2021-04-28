@@ -1,5 +1,10 @@
 package uk.tw.energy.controller;
 
+import java.math.BigDecimal;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
@@ -14,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class MeterReadingControllerTest {
 
@@ -48,12 +54,12 @@ public class MeterReadingControllerTest {
     @Test
     public void givenMultipleBatchesOfMeterReadingsShouldStore() {
         MeterReadings meterReadings = new MeterReadingsBuilder().setSmartMeterId(SMART_METER_ID)
-                .generateElectricityReadings()
-                .build();
+            .generateElectricityReadings()
+            .build();
 
         MeterReadings otherMeterReadings = new MeterReadingsBuilder().setSmartMeterId(SMART_METER_ID)
-                .generateElectricityReadings()
-                .build();
+            .generateElectricityReadings()
+            .build();
 
         meterReadingController.storeReadings(meterReadings);
         meterReadingController.storeReadings(otherMeterReadings);
@@ -68,12 +74,12 @@ public class MeterReadingControllerTest {
     @Test
     public void givenMeterReadingsAssociatedWithTheUserShouldStoreAssociatedWithUser() {
         MeterReadings meterReadings = new MeterReadingsBuilder().setSmartMeterId(SMART_METER_ID)
-                .generateElectricityReadings()
-                .build();
+            .generateElectricityReadings()
+            .build();
 
         MeterReadings otherMeterReadings = new MeterReadingsBuilder().setSmartMeterId("00001")
-                .generateElectricityReadings()
-                .build();
+            .generateElectricityReadings()
+            .build();
 
         meterReadingController.storeReadings(meterReadings);
         meterReadingController.storeReadings(otherMeterReadings);
